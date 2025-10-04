@@ -1,7 +1,33 @@
 {
+  // Désactiver Copilot uniquement dans ce projet
+  "github.copilot.enable": false,
+
+  // Formatage du code à la sauvegarde
+  "editor.formatOnSave": true,
+
+  // Actions automatiques sur sauvegarde
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
-  }
+    "source.fixAll": "explicit",          // corrige si tu demandes manuellement
+    "source.organizeImports": "always",   // nettoie et trie les imports automatiquement
+    "source.sortMembers": "explicit"      // inutile en JS mais ok si tu actives TS plus tard
+  },
+
+  // Style d'indentation
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // Afficher la mini-map à droite (utile pour grands fichiers)
+  "editor.minimap.enabled": true,
+
+  // Empêcher les erreurs TypeScript inutiles en JS
+  "javascript.validate.enable": true,
+  "typescript.validate.enable": false,
+
+  // Prévenir les warnings inutiles de VS Code sur Expo
+  "javascript.suggestionActions.enabled": false,
+
+  // Choisir bash comme terminal par défaut (Ubuntu)
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "files.autoSave": "off",
+  "files.autoSaveDelay": 1000   // délai en ms (ici 1 min)
 }
