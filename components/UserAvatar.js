@@ -3,8 +3,10 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import constants from "../constants/colors";
 const colors=constants.colors;
 
-export default function UserAvatar({toggleModal,toggleDialogType}) {
-
+export default function UserAvatar({toggleModal,toggleDialogType,user,usersList}) {
+  const labelUser = usersList[usersList.length-1]?.split(' ')
+  console.log("labelUser",labelUser)
+console.log("userList",usersList)
   return (
     <Pressable style={styles.container} 
     onPress={()=>{
@@ -13,10 +15,10 @@ export default function UserAvatar({toggleModal,toggleDialogType}) {
     }}
     >
       <View style={styles.label}>
-        <Text style={styles.title}> HB </Text>
+        <Text style={styles.title}> {labelUser ? labelUser[0][0].toString()+labelUser[1][0].toString():"--"} </Text>
         </View>
         <View style={{ }}>
-        <Text style={[styles.title,{color:colors.white,}]}> Boutaleb Habib </Text>
+        <Text style={[styles.title,{color:colors.white,}]}> {usersList[usersList.length-1]||"--"} </Text>
         </View>
         <View style={styles.chevronDown}>
         <Feather name="chevrons-down" size={24} color={colors.white} />

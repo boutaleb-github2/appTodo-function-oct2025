@@ -18,6 +18,8 @@ const [modalVisible,setModalVisible]=useState(false);
 const [todo,setTodo]=useState("");
 const [user,setUser]=useState("");
 const [dialogType,setDialogType]=useState("todo");// "todo" or "user"
+const [todosList,setTodosList]=useState([]); // liste des todos
+const [usersList,setUsersList]=useState([]); // liste des users
 
 // functions
 const toggleModal=(e)=>{
@@ -28,18 +30,45 @@ const toggleDialogType=(e)=>{
 }
 const onChangeTodo = (e) => setTodo(e); // cette fonction est pour gerer le onChangeText dans le AppDialog
 const onChangeUser = (e) => setUser(e); // cette fonction est pour gerer le onChangeText dans le AppDialog
+const addTodo = () => {
+      // on enleve les espaces avant et apres le todo
+      const newTodo = (todo || "").trim();
+      if(!newTodo) {
+        setModalVisible(false);
+        return;
+      }
+      setTodosList((prevTodosList)=>[...prevTodosList, newTodo]);
+      setTodo('');
+      setModalVisible(false);
+    // apres avoir mis a jour le state on sauvegarde les todos dans le asynstorage et firebase
+    
+  }
+  const addUser = () => {
+      // on enleve les espaces avant et apres le user
+      const newUser = (user || "").trim();
+      if(!newUser) {
+        setModalVisible(false);
+        return;
+      }
+      setUsersList((prevUsersList) => [...prevUsersList, newUser]);
+      setUser('');
+      setModalVisible(false);
+    // apres avoir mis a jour le state on sauvegarde les todos dans le asynstorage et firebase
+    
+  }        
 
   return (
     <SafeAreaProvider style={styles.container}>
       <Header/>
       <Divider/>
-      <UserAvatar toggleModal={toggleModal}toggleDialogType={toggleDialogType}/>
-      <TodoList/>
+      <UserAvatar toggleModal={toggleModal}toggleDialogType={toggleDialogType} user={user} usersList={usersList}/>
+      <TodoList usersList={usersList} todosList={todosList}/>
       <BtnAddTodo modalVisible={modalVisible} toggleModal={toggleModal} 
         dialogType={dialogType} toggleDialogType={toggleDialogType}
       />    
     <AddUserOrTodoModal modalVisible={modalVisible} toggleModal={toggleModal} todo={todo} dialogType={dialogType}
-    onChangeTodo={onChangeTodo} onChangeUser={onChangeUser}
+    onChangeTodo={onChangeTodo} onChangeUser={onChangeUser} user={user} addUser={addUser} addTodo={addTodo} 
+    usersList={usersList} todosList={todosList}
     />  
     </SafeAreaProvider>
   );

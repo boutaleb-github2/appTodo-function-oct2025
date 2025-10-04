@@ -5,7 +5,7 @@ const colors=constants.colors;
 
 
 
-export default function AddUserOrTodoModal({modalVisible,toggleModal,dialogType,todo,user,onChangeTodo,onChangeUser}) {
+export default function AddUserOrTodoModal({modalVisible,toggleModal,dialogType,todo,user,onChangeTodo,onChangeUser,addTodo,addUser,usersList,todosList}) {
   // const handleOk = () => {
 //   toggleModal(false);
 //   dialogType==="todo" ? addTodo() : addUser();
@@ -54,15 +54,15 @@ export default function AddUserOrTodoModal({modalVisible,toggleModal,dialogType,
                           <Pressable
                             style={[styles.button, styles.buttonClose]}
                             onPress={() => {
-                              toggleModal(!modalVisible);
-                              // dialogType==="todo" ? addTodo(): addUser();
+                              toggleModal(false);
+                              dialogType==="todo" ? addTodo(): addUser();
                             }}>
-                            <Text style={styles.textStyle}>Ok</Text>
+                            <Text style={styles.textStyle}>{dialogType==="todo" ? "Add todo": "Add user"}</Text>
                           </Pressable>
                           <Pressable
                             style={styles.button}
                             onPress={() => {
-                              toggleModal(!modalVisible);
+                              toggleModal(false);
                               // dialogType==="todo" ? cancelAddTodo(): cancelAddUser();
                             }}>
                             <Text style={styles.textStyle}>cancel</Text>

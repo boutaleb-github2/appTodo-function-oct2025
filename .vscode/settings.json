@@ -29,5 +29,39 @@
   // Choisir bash comme terminal par défaut (Ubuntu)
   "terminal.integrated.defaultProfile.linux": "bash",
   "files.autoSave": "off",
-  "files.autoSaveDelay": 1000   // délai en ms (ici 1 min)
+  "files.autoSaveDelay": 1000,   // délai en ms (ici 1 min)
+  
+  // ❌ coupe l’IntelliSense JS/TS (fini les props comme renderItem, auto-imports, etc.)
+  "javascript.suggest.enabled": false,
+  "typescript.suggest.enabled": false,
+  "javascript.suggest.autoImports": false,
+  "typescript.suggest.autoImports": false,
+
+  // ❌ pas de snippets / fantômes / hints
+  "editor.suggest.showSnippets": false,
+  "editor.inlineSuggest.enabled": false,
+  "editor.parameterHints.enabled": false,
+
+  // ✅ garder uniquement la complétion "mots"
+  "editor.wordBasedSuggestions": true,
+  "editor.wordBasedSuggestionsMode": "currentDocument",
+
+  // suggestions pendant la frappe (nécessaire pour voir les mots)
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+
+  // évite les déclencheurs agressifs (ex: après un point)
+  "editor.suggestOnTriggerCharacters": false,
+
+  // pas d’acceptation involontaire en appuyant sur Entrée
+  "editor.acceptSuggestionOnEnter": "off",
+
+  // pas d’expansion de snippet au Tab
+  "editor.tabCompletion": "off",
+  "emmet.triggerExpansionOnTab": false
+
+
 }
