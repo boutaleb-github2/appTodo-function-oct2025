@@ -1,16 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const KEY = "todos_v1"
+ const KEY = "todos_v1"
 
 export async function loadTodosV1(){
   // 1) lire la clé 'todos_v1'
   // 2) JSON.parse si non null, sinon retourner { todos: [] }
   try{
+  //  const keyStorage = "@user"+key.toString()
   
     const jsonTodos = await AsyncStorage.getItem(KEY);
     const parsed = JSON.parse(jsonTodos);
     console.log("[loadTodosV1] parsed:",parsed)
     // return parsed && Array.isArray(parsed.todos) ? parsed : {todos:[]} // on peu l'ecrire aussi de cette façon
-    if(!parsed || ! Array.isArray(parsed.todos))return {todos:[]}
+    if(!parsed || ! Array.isArray(parsed.user))return {user:[]}
     return parsed
     }catch(e){
     console.warn("erreur dans loadTodosV1",e)
