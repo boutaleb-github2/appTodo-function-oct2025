@@ -1,17 +1,22 @@
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View,Text } from 'react-native';
 import constants from '../constants/colors';
 const colors=constants.colors;
 
 export default function TodoList({usersList,todosList}) {
+  console.log("todosList",todosList)
+  
   const renderItem = ({item})=>{
+    console.log("item",item);    
     return(
     <View style={styles.viewTodo}>
             <View >
              <FontAwesome5 name="dot-circle" size={24} color="black" />
             </View>
             <View>
+              {/**<Text style={styles.title}> {item} </Text>*/}
               <Text style={styles.title}> {item} </Text>
+              
             </View>            
         </View>)
   }

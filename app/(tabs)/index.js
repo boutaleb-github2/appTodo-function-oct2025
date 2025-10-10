@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AddUserOrTodoModal from "../../components/AddUserOrTodoModal";
@@ -8,8 +8,9 @@ import Header from "../../components/Header";
 import TodoList from "../../components/TodoList";
 import UserAvatar from "../../components/UserAvatar";
 import constants from "../../constants/colors";
-const colors=constants.colors;
+import { loadTodosV1, saveUserTodos,clearStorage } from "../../storage/storage";
 
+const colors=constants.colors;
 
 export default function Index() {
 
@@ -21,15 +22,37 @@ const [dialogType,setDialogType]=useState("todo");// "todo" or "user"
 const [todosList,setTodosList]=useState([]); // liste des todos
 const [usersList,setUsersList]=useState([]); // liste des users
 
+useEffect(()=>{
+  // clearStorage()
+  const fetchTodos = async ()=>{
+    try {
+      const loadedTodosObject = await loadTodosV1();
+      console.log("loadedTodosObject",loadedTodosObject.todos)
+      /// je suis ici ppppbbbbbbbbbbbbbbbbbbbbbbbbbbbpbppbpbpb
+      const loadedTodos = Array.isArray(loadedTodosObject.todos)? loadedTodosObject.todos:[]
+      setTodosList(loadedTodos);
+      return true
+    }catch(e){
+      console.warn("Erreur dans fetchTodos",e)
+      return false
+    }    
+  }
+  fetchTodos();   
+
+},[])
+
 // functions
 const toggleModal=(e)=>{
   setModalVisible(e);
 }
+
 const toggleDialogType=(e)=>{
   setDialogType(e);
 }
+
 const onChangeTodo = (e) => setTodo(e); // cette fonction est pour gerer le onChangeText dans le AppDialog
 const onChangeUser = (e) => setUser(e); // cette fonction est pour gerer le onChangeText dans le AppDialog
+
 const addTodo = () => {
       // on enleve les espaces avant et apres le todo
       const newTodo = (todo || "").trim();
@@ -37,10 +60,15 @@ const addTodo = () => {
         setModalVisible(false);
         return;
       }
-      setTodosList((prevTodosList)=>[...prevTodosList, newTodo]);
-      setTodo('');
-      setModalVisible(false);
+     const newTodoList = [...todosList,newTodo]
+    // const todosListObject = {todos:[...newTodosList]} 
+     // setTodosList((prevTodosList)=>[...prevTodosList, newTodo]);
+     setTodosList(newTodoList); 
+     saveUserTodos(null,newTodo);
+     setTodo('');
+     setModalVisible(false);
     // apres avoir mis a jour le state on sauvegarde les todos dans le asynstorage et firebase
+     
     
   }
   const addUser = () => {

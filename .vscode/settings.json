@@ -5,10 +5,11 @@
   // Formatage du code à la sauvegarde
   "editor.formatOnSave": true,
 
-  // Actions automatiques sur sauvegarde
+  // Actions automatiques sur sauvegarde 
+  // "source.organizeImports": "always",   // nettoie et trie les imports automatiquement
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",          // corrige si tu demandes manuellement
-    "source.organizeImports": "always",   // nettoie et trie les imports automatiquement
+   
     "source.sortMembers": "explicit"      // inutile en JS mais ok si tu actives TS plus tard
   },
 
